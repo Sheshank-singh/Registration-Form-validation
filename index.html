@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registration Form</title>
+        <style>
+            body{
+                font-family: Arial;
+                margin: 20px;
+            }
+            .form_container{
+                max-width: 420px;
+                margin: auto;
+            }
+            .label,input{
+                display: block;
+                margin-bottom: 10px;
+                width:100%
+            }
+            .error{
+                color:red;
+                font-size: 14px;
+            }
+            button{
+                padding: 10px;
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+            .success{
+                color:green;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="form_container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+                <label>Name: <input type="text" id="name"></label>
+                <p class="error" id="nameError"></p>
+
+                <label>Address: <input type="text" id="address"></label>
+                <p class="error" id="addressError"></p>
+
+                <label>Phone No: <input type="text" id="phone"></label>
+                <p class="error" id="phoneError"></p>
+
+                <label>Email: <input type="text" id="email"></label>
+                <p class="error" id="emailError"></p>
+
+                <button type="submit">Register</button>
+                <p class="success" id="successMsg"></p>
+        </form>
+    </div>
+<script>
+    document.getElementById("registrationForm").addEventListener("submit", function(event){
+        event.preventDefault();
+        let valid = true;
+        const name = document.getElementById("name").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const email = document.getElementById("email").value.trim()
+
+        document.getElementById("nameError").textContent = "";
+        document.getElementById("addressError").textContent = "";
+        document.getElementById("phoneError").textContent = "";
+        document.getElementById("emailError").textContent = "";
+
+        if(name==""){
+            valid=false;
+            document.getElementById("nameError").textContent="Name needed";
+        }
+        if(address==""){
+            valid=false;
+            document.getElementById("addressError").textContent="Address needed";
+        }
+        if(!/^[0-9]{10}$/.test(phone)){
+            valid=false;
+            document.getElementById("phoneError").textContent="Enter 10 digit No";
+        }
+        if(!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)){
+            valid=false;
+            document.getElementById("emailError").textContent="Enter valid email";
+        }
+         if (valid){
+            document.getElementById("successMsg").textContent = "Registration successful";
+        }
+
+    });
+
+</script>
+</body>
+</html>
